@@ -3,11 +3,23 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { useDispatch } from 'react-redux';
+import { adduser } from '../Redux/Action';
 function Adduser() {
     const [show, setShow] = useState(false);
-
+    const [name, setname] = useState("")
+    const [email, setemail] = useState("")
+    const [image, setimage] = useState("")
+    const [gender, setgender] = useState("")
+    const [password, setpassword] = useState("")
+    const dispatch=useDispatch()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handelsubmit=()=> {
+    const data={name,email,password,gender,image}
+    dispatch(adduser(data))
+    handleClose()
+    }
     return (
         <div>
             <Button variant="primary" onClick={handleShow}>
@@ -22,7 +34,7 @@ function Adduser() {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Full name</Form.Label>
                             <Form.Control
-
+onChange={(event)=>setname(event.target.value)}
                                 type="text"
                                 placeholder="firstname and lastname"
                                 autoFocus
@@ -31,7 +43,7 @@ function Adduser() {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control
-
+onChange={(event)=>setemail(event.target.value)}
                                 type="email"
 
                                 placeholder="name@example.com"
@@ -41,6 +53,7 @@ function Adduser() {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
+                            onChange={(event)=>setpassword(event.target.value)}
                                 type="password"
                                 placeholder="***"
                                 autoFocus
@@ -49,6 +62,7 @@ function Adduser() {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Picture</Form.Label>
                             <Form.Control
+                            onChange={(event)=>setimage(event.target.value)}
                                 type="text"
                                 placeholder="link of your picture"
                                 autoFocus
@@ -56,10 +70,11 @@ function Adduser() {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Gender</Form.Label>
-                            <Form.Select aria-label="Default select example">
+                            <Form.Select onChange={(event)=>setgender(event.target.value)} aria-label="Default select example">
                                 <option>Choose your gender</option>
-                                <option value="1">male</option>
-                                <option value="2">female</option>
+                                <option value="Male">male</option>
+                                <option value="Female">female</option>
+
                             </Form.Select>
                         </Form.Group>
 
@@ -69,7 +84,7 @@ function Adduser() {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={handelsubmit}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

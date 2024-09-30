@@ -2,6 +2,7 @@ import React from 'react'
 import Table from 'react-bootstrap/Table';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteuser } from '../Redux/Action';
+import Edituser from './Edituser';
 function Dashbord() {
     const users = useSelector(state => state.users)
     console.log(users);
@@ -29,7 +30,7 @@ function Dashbord() {
                             <td>{user.gender}</td>
                             <td>{user.password}</td>
                             <td style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
-                                <button>Edit</button>
+                                <Edituser user={user}/>
                                 <button onClick={() => dispatch(deleteuser(user._id))}>Delete</button>
                             </td>
                         </tr>

@@ -26,3 +26,26 @@ export const deleteuser = (id) => async (dispatch) => {
     }
 
 }
+export const adduser = (data) => async (dispatch) => {
+    try {
+        const response = await axios.post("http://192.168.2.38:4556/api/user/add", data)
+        console.log(response);
+        dispatch(getusers())
+
+    } catch (error) {
+        console.log(error);
+
+    }
+}
+export const edituser = (id, data) => async (dispatch) => {
+    try {
+        const response = await axios.put("http://192.168.2.38:4556/api/user/update/" + id, data)
+        console.log(response);
+        dispatch(getusers())
+
+    } catch (error) {
+        console.log(error);
+
+    }
+}
+
